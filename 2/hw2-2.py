@@ -38,7 +38,7 @@ for heigh in range(512):
         ori_value = np.linalg.inv(h) @ project_pt.T
         ori_value = ori_value / ori_value[2]
         u,v = ori_value[0], ori_value[1]
-
+        
         # bilinear interpolation
         a = math.ceil(u)
         b = math.floor(u)
@@ -49,10 +49,26 @@ for heigh in range(512):
 
 figure = plt.figure(figsize=(12, 6))
 subplot1 = figure.add_subplot(1, 2, 1)
+src_x = []
+src_y = []
+for i in range(len(source_points)):
+    src_x.append(source_points[i][0])
+    src_y.append(source_points[i][1])
+src_x.append(source_points[0][0])
+src_y.append(source_points[0][1])
+subplot1.plot(src_x, src_y, 'r')
 subplot1.title.set_text("Source Image")
 subplot1.imshow(img)
 
 subplot2 = figure.add_subplot(1, 2, 2)
+dest_x = []
+dest_y = []
+for i in range(len(target_points)):
+    dest_x.append(target_points[i][0])
+    dest_y.append(target_points[i][1])
+dest_x.append(target_points[0][0])
+dest_y.append(target_points[0][1])
+subplot2.plot(dest_x, dest_y, 'r')
 subplot2.title.set_text("Destination Image")
 subplot2.imshow(new_img.astype('uint8'))
 plt.show()
